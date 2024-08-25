@@ -12,15 +12,18 @@ const router = createRouter({
     routes: [
         { path: '/', redirect: '/coaches' },
         { path: '/coaches', component: CoachesList },
-        { path: '/coaches/:id', component: CoachDetail, children:[
-            {path: 'contact', component: ContactCoach}, // /coaches/ahsan/contact
-        ]},
+        {
+            path: '/coaches/:id', component: CoachDetail,
+            props: true, // this line means, we can receive id as a prop on component named Coach Detail
+            children: [
+                { path: 'contact', component: ContactCoach }, // /coaches/ahsan/contact
+            ]
+        },
         { path: '/register', component: CoachesRegistration },
-        // { path: '/contact', component: null },
         { path: '/requests', component: RequestsReceived },
         { path: '/:notFound(.*)', component: NotFound },
     ]
-})
+});
 
 
 export default router;

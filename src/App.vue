@@ -1,5 +1,5 @@
 <template>
-    <the-header title="THE HEADER FROM APP FILE">
+    <the-header>
     </the-header>
     <router-view></router-view>
 </template>
