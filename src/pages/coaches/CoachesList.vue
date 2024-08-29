@@ -6,7 +6,7 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -42,6 +42,9 @@ export default {
     };
   },
   computed: {
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
+    },
     filteredCoaches() {
       const coaches = this.$store.getters["coaches/coaches"]; // 1 coaches is from the store name and the other one is from index.js the dummy coaches(getters.js)
       return coaches.filter((coach) => {
