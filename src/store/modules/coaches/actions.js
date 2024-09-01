@@ -9,8 +9,11 @@ export default {
       hourlyRate: data.rate,
       areas: data.areas,
     };
+
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://mainvueproject31august2024-default-rtdb.firebaseio.com/coahes/${userId}.json`,
+      `https://mainvueproject31august2024-default-rtdb.firebaseio.com/coahes/${userId}.json?=auth=` +
+        token,
       {
         method: "PUT",
         body: JSON.stringify(coachData),
@@ -30,18 +33,21 @@ export default {
   },
   async loadCoaches(context, payload) {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
-        return;
+      return;
     }
 
     const response = await fetch(
       `https://mainvueproject31august2024-default-rtdb.firebaseio.com/coahes.json`
     );
     const responseData = await response.json();
+
     if (!response.ok) {
       const error = new Error(responseData.message || "Failed to fetch!");
       throw error;
     }
+
     const coaches = [];
+
     for (const key in responseData) {
       const coach = {
         id: key,
@@ -53,7 +59,8 @@ export default {
       };
       coaches.push(coach);
     }
+
     context.commit("setCoaches", coaches);
-    context.commit("setFetchTimestamp", coaches);
+    context.commit("setFetchTimestamp");
   },
 };
