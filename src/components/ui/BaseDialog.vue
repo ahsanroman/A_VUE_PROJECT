@@ -38,13 +38,13 @@ export default {
       default: false,
     },
   },
-  emits: ["close"],
+  emits: ['close'],
   methods: {
     tryClose() {
       if (this.fixed) {
         return;
       }
-      this.$emit("close");
+      this.$emit('close');
     },
   },
 };
@@ -99,18 +99,21 @@ menu {
 }
 
 .dialog-enter-from,
-.dialog-leave-to{
+.dialog-leave-to {
   opacity: 0;
   transform: scale(0.8);
 }
-.dialog-enter-active{
+
+.dialog-enter-active {
   transition: all 0.3s ease-out;
 }
-.dialog-leave-active{
+
+.dialog-leave-active {
   transition: all 0.3s ease-in;
 }
+
 .dialog-enter-to,
-.dialog-leave-from{
+.dialog-leave-from {
   opacity: 1;
   transform: scale(1);
 }
